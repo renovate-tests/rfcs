@@ -4,6 +4,8 @@ const path = require('path');
 const webpack = require('webpack');
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 // internal
 const paths = require('./config/paths');
@@ -22,6 +24,8 @@ const postCSSLoaderOptions = {
     }),
   ],
 };
+const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
+const host = process.env.HOST || '0.0.0.0';
 
 module.exports = {
   mode: 'development',
@@ -37,12 +41,33 @@ module.exports = {
   ],
   output: {
     pathinfo: true,
-    filename: 'static/js/bundle.js',
+    filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
     publicPath: '/',
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+  },
+  devServer: {
+    disableHostCheck: process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
+    compress: true,
+    clientLogLevel: 'info',
+    contentBase: paths.appPublic,
+    watchContentBase: true,
+    hot: true,
+    publicPath: '/',
+    quiet: false,
+    watchOptions: {
+      ignored: ignoredFiles(paths.appSrc),
+    },
+    https: protocol === 'https',
+    host: host,
+    overlay: false,
+    historyApiFallback: {
+      // Paths with dots should still use the history fallback.
+      // See https://github.com/facebook/create-react-app/issues/387.
+      disableDotRule: true,
+    },
   },
   optimization: {
     // Automatically split vendor and commons
@@ -80,6 +105,7 @@ module.exports = {
           {
             // src以下を対象にしたbabel
             test: /\.(js|jsx|mjs)$/,
+            type: 'javascript/auto',
             include: paths.srcPaths,
             exclude: [/[/\\\\]node_modules[/\\\\]/],
             use: [
@@ -110,6 +136,7 @@ module.exports = {
           {
             // 外部jsファイルを対象にしたbabel
             test: /\.js$/,
+            type: 'javascript/auto',
             use: [
               // compileのチューニングloader
               require.resolve('thread-loader'),
@@ -125,17 +152,16 @@ module.exports = {
           },
           {
             // CSS Modulesを除くloader preprocesses
-            test: /\.css$/,
+            test: [/\.css$/, /\.scss$/],
             exclude: /\.module\.css$/,
             use: [
               require.resolve('style-loader'),
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 4,
+                  importLoaders: 3,
                 },
               },
-              require.resolve('raw-loader'),
               require.resolve('resolve-url-loader'),
               {
                 loader: require.resolve('sass-loader'),
@@ -199,7 +225,7 @@ module.exports = {
       template: paths.appHtml,
     }),
     // 環境変数をHTML内で使えるようにする。(e.g.: %PUBLIC_URL%)
-    new InterpolateHtmlPlugin(env.raw),
+    // new InterpolateHtmlPlugin(env.raw),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // 環境変数をjsで参照できるようにする。(e.g.: process.env.NODE_ENV)

@@ -3,6 +3,7 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
@@ -113,6 +114,7 @@ module.exports = {
           {
             // src以下を対象にしたbabel
             test: /\.(js|jsx|mjs)$/,
+            type: 'javascript/auto',
             include: paths.srcPaths,
             exclude: [/[/\\\\]node_modules[/\\\\]/],
             use: [
@@ -143,6 +145,7 @@ module.exports = {
           {
             // 外部jsファイルを対象にしたbabel
             test: /\.js$/,
+            type: 'javascript/auto',
             use: [
               // compileのチューニングloader
               require.resolve('thread-loader'),
@@ -157,7 +160,7 @@ module.exports = {
           },
           {
             // CSS Modulesを除くloader preprocesses
-            test: /\.css$/,
+            test: [/\.css$/, /\.scss$/],
             exclude: /\.module\.css$/,
             loader: ExtractTextPlugin.extract({
               ...{
@@ -171,10 +174,9 @@ module.exports = {
                     {
                       loader: require.resolve('css-loader'),
                       options: {
-                        importLoaders: 4,
+                        importLoaders: 3,
                       },
                     },
-                    require.resolve('raw-loader'),
                     require.resolve('resolve-url-loader'),
                     {
                       loader: require.resolve('sass-loader'),
