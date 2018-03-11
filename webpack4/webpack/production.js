@@ -41,7 +41,7 @@ module.exports = {
   entry: [
     '@babel/polyfill',
     'whatwg-fetch',
-    paths.overrideSemanticCss,
+    // paths.overrideSemanticCss,
     paths.appIndexCss,
     paths.appIndexJs,
   ],
