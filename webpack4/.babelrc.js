@@ -1,14 +1,23 @@
 'use strict';
 
-const env = process.env.BABEL_ENV || process.env.NODE_ENV;
+const env = process.env.BABEL_ENV;
 
 const presets = ['@babel/flow', '@babel/react'];
 const plugins = ['@babel/plugin-syntax-class-properties', ['@babel/plugin-proposal-class-properties', {loose: true}]];
 
 if (env === 'local') {
   presets.push.apply(presets, [
-    ['@babel/preset-stage-1', {loose: true}],
-    [('@babel/env', {loose: true, modules: false, useBuiltIns: 'usage'})],
+    ['@babel/preset-stage-1'],
+    [
+      '@babel/env',
+      {
+        targets: {
+          browsers: ['> 1% in JP'],
+          modules: false,
+          useBuiltIns: 'usage',
+        },
+      },
+    ],
   ]);
   plugins.push.apply(plugins, ['react-hot-loader/babel']);
 }
@@ -27,7 +36,7 @@ if (env === 'test') {
   ]);
 }
 
-if (env === 'develop') {
+if (env === 'development') {
   presets.push.apply(presets, [
     '@babel/preset-stage-1',
     [
