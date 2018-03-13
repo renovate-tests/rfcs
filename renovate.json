@@ -1,3 +1,13 @@
 {
-  "pinVersions": false
+  "pinVersions": false,
+  "packageFiles": [
+    {
+      "packageFile": "graphql/package.json",
+      "pinVersions": false
+    },
+    {
+      "packageFile": "webpack4/package.json",
+      "pinVersions": false
+    }
+  ]
 }
