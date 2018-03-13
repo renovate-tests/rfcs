@@ -1,10 +1,8 @@
 {
-  "extends": [
-    "packageRules": [
-      {
-        "packagePatterns": ["^"],
-        "enabled": true
-      }
-    ]
+  "packageRules": [
+    {
+      "packagePatterns": ["^"],
+      "enabled": true
+    }
   ]
 }
