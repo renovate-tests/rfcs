@@ -8,6 +8,10 @@
     {
       "packageFile": "webpack4/package.json",
       "pinVersions": false
+    },
+    {
+      "packageFile": "rxjs/package.json",
+      "pinVersions": false
     }
   ]
 }
