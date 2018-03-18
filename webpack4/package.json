@@ -6,6 +6,7 @@
   "author": "shsssskn",
   "license": "MIT",
   "private": true,
+  "sideEffects": false,
   "dependencies": {
     "graphql-tag": "^2.8.0",
     "immutable": "^4.0.0-rc.9",
