@@ -45,8 +45,7 @@ module.exports = {
     chunkFilename: 'static/js/[name].chunk.js',
     publicPath: '/',
     // Point sourcemap entries to original disk location (format as URL on Windows)
-    devtoolModuleFilenameTemplate: info =>
-      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   devServer: {
     disableHostCheck: process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
@@ -79,9 +78,7 @@ module.exports = {
   },
   resolve: {
     // Webpackがmoduleを探しに行く時のfallback処理
-    modules: ['node_modules', paths.appNodeModules].concat(
-      process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
-    ),
+    modules: ['node_modules', paths.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
   },
   module: {
@@ -162,7 +159,9 @@ module.exports = {
                   importLoaders: 3,
                 },
               },
-              require.resolve('resolve-url-loader'),
+              {
+                loader: require.resolve('resolve-url-loader'),
+              },
               {
                 loader: require.resolve('sass-loader'),
                 options: {

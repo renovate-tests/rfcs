@@ -86,6 +86,7 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
   },
   module: {
+    // export moduleが不足しているときにWarningではなくErrorを発生させる。
     strictExportPresence: true,
     rules: [
       {
@@ -245,10 +246,7 @@ module.exports = {
     // new InterpolateHtmlPlugin(env.raw),
     // 環境変数をjsで参照できるようにする。(e.g.: process.env.NODE_ENV)
     new webpack.DefinePlugin(env.stringified),
-    // new ExtractTextPlugin({
-    //   filename: cssFilename,
-    //   allChunks: true,
-    // }),
+    // CSSを外部書き出しする。
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].css',
       chunkFilename: 'static/css/[name].[id].css',
