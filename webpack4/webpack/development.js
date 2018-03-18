@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+// const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 // internal
 const paths = require('./config/paths');

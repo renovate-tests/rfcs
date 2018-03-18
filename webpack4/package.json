@@ -7,6 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "graphql-tag": "^2.8.0",
     "immutable": "^4.0.0-rc.9",
     "react": "16.3.0-alpha.1",
     "react-dom": "16.3.0-alpha.1",
@@ -41,10 +42,8 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-relay": "^0.0.21",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "fs-extra": "^5.0.0",
-    "graphql-tag": "^2.8.0",
     "html-loader": "^1.0.0-alpha.0",
     "html-webpack-plugin": "^3.0.6",
     "mini-css-extract-plugin": "^0.2.0",
