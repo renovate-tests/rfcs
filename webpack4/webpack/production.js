@@ -6,6 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // internal
 const paths = require('./config/paths');
@@ -15,11 +17,11 @@ const env = require('./config/env');
 const cssFilename = 'static/css/[name].[contenthash:8].css';
 const shouldUseRelativeAssetPaths = paths.servedPath === './';
 
-const extractTextPluginOptions =
+const extractTextPluginOptions = () => {
   // CSSのディレクトリ構造を維持するための設定
-  shouldUseRelativeAssetPaths
-    ? {publicPath: Array(cssFilename.split('/').length).join('../')}
-    : {};
+  const apply = shouldUseRelativeAssetPaths ? {publicPath: Array(cssFilename.split('/').length).join('../')} : {};
+  return {...apply};
+};
 
 const postCSSLoaderOptions = {
   // 外部CSS読み込みに対応した設定
@@ -47,18 +49,15 @@ module.exports = {
     paths.appIndexJs,
   ],
   output: {
-    pathinfo: true,
+    path: paths.appBuild,
     filename: 'static/js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     publicPath: paths.servedPath,
-    devtoolModuleFilenameTemplate: info =>
-      path
-        .relative(paths.appSrc, info.absoluteResourcePath)
-        .replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   optimization: {
     minimizer: [
-      new webpack.optimize.UglifyJsPlugin({
+      new UglifyJsPlugin({
         uglifyOptions: {
           ecma: 8,
           compress: {
@@ -92,9 +91,7 @@ module.exports = {
   },
   resolve: {
     // Webpackがmoduleを探しに行く時のfallback処理
-    modules: ['node_modules', paths.appNodeModules].concat(
-      process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
-    ),
+    modules: ['node_modules', paths.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
   },
   module: {
@@ -162,67 +159,54 @@ module.exports = {
             // CSS Modulesを除くloader preprocesses
             test: [/\.css$/, /\.scss$/],
             exclude: /\.module\.css$/,
-            loader: ExtractTextPlugin.extract({
-              ...{
-                fallback: {
-                  loader: require.resolve('style-loader'),
-                  options: {
-                    hmr: false,
-                  },
-                  use: [
-                    require.resolve('style-loader'),
-                    {
-                      loader: require.resolve('css-loader'),
-                      options: {
-                        importLoaders: 3,
-                      },
-                    },
-                    require.resolve('resolve-url-loader'),
-                    {
-                      loader: require.resolve('sass-loader'),
-                      options: {
-                        sourceMap: true,
-                      },
-                    },
-                    {
-                      loader: require.resolve('postcss-loader'),
-                      options: postCSSLoaderOptions,
-                    },
-                  ],
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 3,
                 },
               },
-              ...extractTextPluginOptions,
-            }),
+              {
+                loader: require.resolve('resolve-url-loader'),
+              },
+              {
+                loader: require.resolve('sass-loader'),
+                options: {
+                  sourceMap: true,
+                  precision: 8,
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
+              },
+            ],
           },
           {
             // CSS Modulesを対象にしたloader preprocesses
             test: /\.module\.css$/,
-            loader: ExtractTextPlugin.extract({
-              ...{
-                fallback: {
-                  loader: require.resolve('style-loader'),
-                  options: {
-                    hmr: false,
-                  },
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 2,
                 },
-                use: [
-                  require.resolve('style-loader'),
-                  {
-                    loader: require.resolve('css-loader'),
-                    options: {
-                      importLoaders: 1,
-                      modules: true,
-                      localIdentName: '[path]__[name]___[local]',
-                    },
-                  },
-                  {
-                    loader: require.resolve('postcss-loader'),
-                    options: postCSSLoaderOptions,
-                  },
-                ],
               },
-              extractTextPluginOptions,
-            }),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                  localIdentName: '[path]__[name]___[local]',
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
+              },
+            ],
           },
           {
             // GraphQLを対象にしたloader preprocesses
@@ -267,12 +251,16 @@ module.exports = {
       },
     }),
     // 環境変数をHTML内で使えるようにする。(e.g.: %PUBLIC_URL%)
-    new InterpolateHtmlPlugin(env.raw),
+    // new InterpolateHtmlPlugin(env.raw),
     // 環境変数をjsで参照できるようにする。(e.g.: process.env.NODE_ENV)
     new webpack.DefinePlugin(env.stringified),
-    new ExtractTextPlugin({
-      filename: cssFilename,
-      allChunks: true,
+    // new ExtractTextPlugin({
+    //   filename: cssFilename,
+    //   allChunks: true,
+    // }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     // moment.jsはpreprocessesしない。
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
