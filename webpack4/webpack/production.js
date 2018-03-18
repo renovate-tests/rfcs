@@ -14,15 +14,6 @@ const paths = require('./config/paths');
 const env = require('./config/env');
 
 // initialize
-const cssFilename = 'static/css/[name].[contenthash:8].css';
-const shouldUseRelativeAssetPaths = paths.servedPath === './';
-
-const extractTextPluginOptions = () => {
-  // CSSのディレクトリ構造を維持するための設定
-  const apply = shouldUseRelativeAssetPaths ? {publicPath: Array(cssFilename.split('/').length).join('../')} : {};
-  return {...apply};
-};
-
 const postCSSLoaderOptions = {
   // 外部CSS読み込みに対応した設定
   ident: 'postcss',
@@ -259,8 +250,8 @@ module.exports = {
     //   allChunks: true,
     // }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: 'static/css/[name].css',
+      chunkFilename: 'static/css/[name].[id].css',
     }),
     // moment.jsはpreprocessesしない。
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
