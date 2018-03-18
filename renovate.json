@@ -7,7 +7,7 @@
     },
     {
       "packageFile": "webpack4/package.json",
-      "pinVersions": false
+      "pinVersions": true
     },
     {
       "packageFile": "rxjs/package.json",
