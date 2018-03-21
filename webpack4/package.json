@@ -27,7 +27,7 @@
     "autoprefixer": "8.1.0",
     "babel-eslint": "8.2.2",
     "babel-loader": "8.0.0-beta.2",
-    "babel-plugin-named-asset-import": "1.0.0-next.47d2d941",
+    "babel-plugin-named-asset-import": "1.0.0-next.b2fd8db8",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "css-loader": "0.28.11",
     "dotenv": "5.0.1",

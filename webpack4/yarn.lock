@@ -1383,9 +1383,9 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-named-asset-import@1.0.0-next.47d2d941:
-  version "1.0.0-next.47d2d941"
-  resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-1.0.0-next.47d2d941.tgz#a4bf92153befb311def0afba6690819d9032bbd9"
+babel-plugin-named-asset-import@1.0.0-next.b2fd8db8:
+  version "1.0.0-next.b2fd8db8"
+  resolved "https://registry.yarnpkg.com/babel-plugin-named-asset-import/-/babel-plugin-named-asset-import-1.0.0-next.b2fd8db8.tgz#bd32f356288cbab326196b5f75547bc0dedf540a"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
