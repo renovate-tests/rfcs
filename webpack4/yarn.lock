@@ -427,6 +427,14 @@
     "@babel/helper-function-name" "7.0.0-beta.40"
     "@babel/plugin-syntax-class-properties" "7.0.0-beta.40"
 
+"@babel/plugin-proposal-class-properties@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.0.0-beta.44.tgz#aff9192a883b41fdf1c73026b9105c92e931c55e"
+  dependencies:
+    "@babel/helper-function-name" "7.0.0-beta.44"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/plugin-syntax-class-properties" "7.0.0-beta.44"
+
 "@babel/plugin-proposal-decorators@7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.0.0-beta.40.tgz#d2c033bfa55719ddea681c241c9609b346c7cd9c"
@@ -506,13 +514,21 @@
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0-beta.40.tgz#ff82c04c6d97cdb947dc64e3f3d4bc791e85a16f"
 
+"@babel/plugin-syntax-class-properties@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0-beta.44.tgz#1e4e67ef6d7101a3a7d2ae5f60e580cbf4b7750f"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+
 "@babel/plugin-syntax-decorators@7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.0.0-beta.40.tgz#26700fe4599606701bf73cddedeb6f470aa0fe54"
 
-"@babel/plugin-syntax-dynamic-import@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.0.0-beta.40.tgz#5d9b58d4fbe1dfabbd44dee2eb267c466d7e9b87"
+"@babel/plugin-syntax-dynamic-import@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.0.0-beta.44.tgz#1a7d009f892bc9799dcb22ace4bd24198eef8992"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
 "@babel/plugin-syntax-export-default-from@7.0.0-beta.40":
   version "7.0.0-beta.40"
@@ -526,9 +542,11 @@
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.0.0-beta.40.tgz#2326da177cd83ad3d12e8324ad003edb702c384c"
 
-"@babel/plugin-syntax-import-meta@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-import-meta/-/plugin-syntax-import-meta-7.0.0-beta.40.tgz#40b2f7508d418fe624148e81030e2355b689f104"
+"@babel/plugin-syntax-import-meta@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-import-meta/-/plugin-syntax-import-meta-7.0.0-beta.44.tgz#48d0af27aac06938542cc71abda014301af2dc13"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
 "@babel/plugin-syntax-jsx@7.0.0-beta.40":
   version "7.0.0-beta.40"
@@ -1085,17 +1103,18 @@
     "@babel/plugin-transform-react-jsx-self" "7.0.0-beta.44"
     "@babel/plugin-transform-react-jsx-source" "7.0.0-beta.44"
 
-"@babel/preset-stage-3@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://registry.yarnpkg.com/@babel/preset-stage-3/-/preset-stage-3-7.0.0-beta.40.tgz#5b6eb45908d8355ab5512b4d1dd2fb4c3cad2dec"
+"@babel/preset-stage-3@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/preset-stage-3/-/preset-stage-3-7.0.0-beta.44.tgz#954e485be21bd76627aa449b15b9a748757ac440"
   dependencies:
-    "@babel/plugin-proposal-async-generator-functions" "7.0.0-beta.40"
-    "@babel/plugin-proposal-class-properties" "7.0.0-beta.40"
-    "@babel/plugin-proposal-object-rest-spread" "7.0.0-beta.40"
-    "@babel/plugin-proposal-optional-catch-binding" "7.0.0-beta.40"
-    "@babel/plugin-proposal-unicode-property-regex" "7.0.0-beta.40"
-    "@babel/plugin-syntax-dynamic-import" "7.0.0-beta.40"
-    "@babel/plugin-syntax-import-meta" "7.0.0-beta.40"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/plugin-proposal-async-generator-functions" "7.0.0-beta.44"
+    "@babel/plugin-proposal-class-properties" "7.0.0-beta.44"
+    "@babel/plugin-proposal-object-rest-spread" "7.0.0-beta.44"
+    "@babel/plugin-proposal-optional-catch-binding" "7.0.0-beta.44"
+    "@babel/plugin-proposal-unicode-property-regex" "7.0.0-beta.44"
+    "@babel/plugin-syntax-dynamic-import" "7.0.0-beta.44"
+    "@babel/plugin-syntax-import-meta" "7.0.0-beta.44"
 
 "@babel/runtime@7.0.0-beta.40":
   version "7.0.0-beta.40"
