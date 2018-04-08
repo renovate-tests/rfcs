@@ -24,7 +24,7 @@
     "@babel/preset-flow": "7.0.0-beta.42",
     "@babel/preset-react": "7.0.0-beta.42",
     "@babel/preset-stage-1": "7.0.0-beta.42",
-    "autoprefixer": "8.1.0",
+    "autoprefixer": "8.2.0",
     "babel-eslint": "8.2.2",
     "babel-loader": "8.0.0-beta.2",
     "babel-plugin-named-asset-import": "1.0.0-next.47d2d941",
