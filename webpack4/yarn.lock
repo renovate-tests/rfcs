@@ -471,11 +471,12 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
     "@babel/plugin-syntax-optional-catch-binding" "7.0.0-beta.44"
 
-"@babel/plugin-proposal-optional-chaining@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.0.0-beta.40.tgz#2fe8e8e0f17fa0fe0a9bdd3e7d72594ba773cc80"
+"@babel/plugin-proposal-optional-chaining@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.0.0-beta.44.tgz#f90682a4ced3eaf80c906a349ce9faa424c0b211"
   dependencies:
-    "@babel/plugin-syntax-optional-chaining" "7.0.0-beta.40"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/plugin-syntax-optional-chaining" "7.0.0-beta.44"
 
 "@babel/plugin-proposal-unicode-property-regex@7.0.0-beta.40":
   version "7.0.0-beta.40"
@@ -563,6 +564,12 @@
 "@babel/plugin-syntax-optional-chaining@7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-optional-chaining/-/plugin-syntax-optional-chaining-7.0.0-beta.40.tgz#0a2628511e8f7f35666f5977fb07e1a8d1d363eb"
+
+"@babel/plugin-syntax-optional-chaining@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-optional-chaining/-/plugin-syntax-optional-chaining-7.0.0-beta.44.tgz#3e41156dc1cc94b1b6cc21cfb96e50dda4ad9986"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
 "@babel/plugin-transform-arrow-functions@7.0.0-beta.40":
   version "7.0.0-beta.40"
