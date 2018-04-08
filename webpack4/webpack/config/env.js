@@ -1,6 +1,5 @@
 // external
 const fs = require('fs');
-const path = require('path');
 const {Map} = require('immutable');
 
 // internal
@@ -24,7 +23,7 @@ dotenvFiles.forEach(dotenvFile => {
     require('dotenv-expand')(
       require('dotenv').config({
         path: dotenvFile,
-      })
+      }),
     );
   }
 });
@@ -38,7 +37,7 @@ const raw = rawSeq.reduce(
   {
     NODE_ENV: process.env.NODE_ENV || 'development',
     PUBLIC_URL: process.env.PUBLIC_URL || paths.publicUrl,
-  }
+  },
 );
 
 const stringifiedSeq = Map(raw).keySeq();
