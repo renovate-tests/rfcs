@@ -29,7 +29,7 @@ const host = process.env.HOST || '0.0.0.0';
 
 module.exports = {
   mode: 'development',
-  devtool: 'cheap-source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
     '@babel/polyfill',
     'whatwg-fetch',
@@ -44,8 +44,10 @@ module.exports = {
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
     publicPath: '/',
-    // Point sourcemap entries to original disk location (format as URL on Windows)
-    devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+    // Point sourcemap entries to
+    // original disk location (format as URL on Windows)
+    devtoolModuleFilenameTemplate: info =>
+      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   devServer: {
     disableHostCheck: process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
@@ -69,16 +71,17 @@ module.exports = {
     },
   },
   optimization: {
-    // Automatically split vendor and commons
+    // エンドユーザーのキャッシュ対策
     splitChunks: {
       chunks: 'all',
     },
-    // Keep the runtime chunk seperated to enable long term caching
     runtimeChunk: true,
   },
   resolve: {
     // Webpackがmoduleを探しに行く時のfallback処理
-    modules: ['node_modules', paths.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
+    modules: ['node_modules', paths.appNodeModules].concat(
+      process.env.NODE_PATH.split(path.delimiter).filter(Boolean),
+    ),
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
   },
   module: {

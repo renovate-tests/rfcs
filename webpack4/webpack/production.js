@@ -3,10 +3,10 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 // const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 // internal
 const paths = require('./config/paths');
@@ -43,16 +43,28 @@ module.exports = {
     filename: 'static/js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     publicPath: paths.servedPath,
-    devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: info =>
+      path
+        .relative(paths.appSrc, info.absoluteResourcePath)
+        .replace(/\\/g, '/'),
   },
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
-          ecma: 8,
+          parse: {
+            // we want uglify-js to parse ecma 8 code. However, we don't want it
+            // to apply any minfication steps that turns valid ecma 5 code
+            // into invalid ecma 5 code. This is why the 'compress' and 'output'
+            // sections only apply transformations that are ecma 5 safe
+            // https://github.com/facebook/create-react-app/pull/4234
+            ecma: 8,
+          },
           compress: {
+            ecma: 5,
             warnings: false,
-            // Disabled because of an issue with Uglify breaking seemingly valid code:
+            // Disabled because of an issue
+            // with Uglify breaking seemingly valid code:
             // https://github.com/facebook/create-react-app/issues/2376
             // Pending further investigation:
             // https://github.com/mishoo/UglifyJS2/issues/2011
@@ -62,8 +74,11 @@ module.exports = {
             safari10: true,
           },
           output: {
+            ecma: 5,
             comments: false,
-            // 絵文字はminifyしない。
+            // Turned on because emoji
+            // and regex is not minified properly using default
+            // https://github.com/facebook/create-react-app/issues/2488
             ascii_only: true,
           },
         },
@@ -71,6 +86,7 @@ module.exports = {
         cache: true,
         sourceMap: false,
       }),
+      new OptimizeCSSAssetsPlugin(),
     ],
     // Automatically split vendor and commons
     splitChunks: {
@@ -81,7 +97,9 @@ module.exports = {
   },
   resolve: {
     // Webpackがmoduleを探しに行く時のfallback処理
-    modules: ['node_modules', paths.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
+    modules: ['node_modules', paths.appNodeModules].concat(
+      process.env.NODE_PATH.split(path.delimiter).filter(Boolean),
+    ),
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
   },
   module: {
@@ -247,8 +265,8 @@ module.exports = {
     new webpack.DefinePlugin(env.stringified),
     // CSSを外部書き出しする。
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].css',
-      chunkFilename: 'static/css/[name].[id].css',
+      filename: 'static/css/[name].[contenthash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
     // moment.jsはpreprocessesしない。
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
