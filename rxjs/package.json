@@ -55,7 +55,7 @@
     "postcss-loader": "^2.1.1",
     "react-dev-utils": "^6.0.0-next.47d2d941",
     "resolve-url-loader": "^2.3.0",
-    "sass-loader": "^6.0.7",
+    "sass-loader": "^7.0.0",
     "style-loader": "^0.20.3",
     "svgr": "^1.9.0",
     "thread-loader": "^1.1.5",
