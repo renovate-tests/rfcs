@@ -65,7 +65,7 @@
     "prettier-stylelint": "0.4.2",
     "react-dev-utils": "6.0.0-next.b2fd8db8",
     "resolve-url-loader": "2.3.0",
-    "sass-loader": "6.0.7",
+    "sass-loader": "7.0.1",
     "style-loader": "0.20.3",
     "stylelint": "9.2.0",
     "stylelint-config-idiomatic-order": "5.0.0",
