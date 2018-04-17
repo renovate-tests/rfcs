@@ -69,7 +69,7 @@
     "style-loader": "0.20.3",
     "stylelint": "9.2.0",
     "stylelint-config-idiomatic-order": "5.0.0",
-    "svgr": "1.9.0",
+    "svgr": "1.9.1",
     "thread-loader": "1.1.5",
     "uglifyjs-webpack-plugin": "1.2.4",
     "url-loader": "1.0.1",
